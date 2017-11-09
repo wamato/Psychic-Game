@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Psychic Game</title>
+</head>
+
+<body>
+
+    <div id="game">
+        <p>Guess what letter I'm thinking of...(press a lower case letter to begin!)</p>
+    </div>
+
+    <script type="text/javascript">
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+            "s",
+            "t", "u", "v", "w", "x", "y", "z"]
+
+
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 15;
+        var guessesUsed = [];
+
+
+        document.onkeyup = function (event) {
+
+            var userGuess = event.key;
+
+            var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+            if ((userGuess === "a") || (userGuess === "b") || (userGuess === "c") || (userGuess === "d") || (
+                    userGuess === "e") || (userGuess === "f") ||
+                (userGuess === "g") || (userGuess === "h") || (userGuess === "i") || (userGuess === "j") || (
+                    userGuess === "k") || (userGuess === "l") || (userGuess === "m") ||
+                (userGuess === "n") || (userGuess === "o") || (userGuess === "p") || (userGuess === "q") || (
+                    userGuess === "r") || (userGuess === "s") || (userGuess === "t") ||
+                (userGuess === "u") || (userGuess === "v") || (userGuess === "w") || (userGuess === "x") || (
+                    userGuess === "y") || (userGuess === "z")) {
+
+                if (userGuess === computerGuess) {
+                    wins++;
+                } else if (userGuess !== computerGuess) {
+                    guessesLeft = guessesLeft - 1;
+
+                }
+                if (guessesLeft === 0) {
+                    losses++;
+                }
+                if ((guessesLeft === 0) && (losses = losses++)) {
+                    guessesLeft = 15;
+                } else if (((guessesLeft === 0) || (guessesLeft === 1) || (guessesLeft === 2) || (guessesLeft ===
+                            3) || (guessesLeft === 4) || (guessesLeft === 5) ||
+                        (guessesLeft === 6) || (guessesLeft === 7) || (guessesLeft === 8) || (guessesLeft === 9) ||
+                        (guessesLeft === 10) ||
+                        (guessesLeft === 11) || (guessesLeft === 12) || (guessesLeft === 13) || (guessesLeft === 14) ||
+                        (guessesLeft === 15)) && (wins = wins++)) {
+                    guessesLeft = 15;
+                }
+
+
+                var html =
+                    "<p>You chose: " + userGuess + "</p>" +
+                    "<p>The computer chose: " + computerGuess + "</p>" +
+                    "<p>wins: " + wins + "</p>" +
+                    "<p>losses: " + losses + "</p>" +
+                    "<p>guesses left: " + guessesLeft + "</p>";
+                "<p>Guesses used: " + guessesUsed + "</p>";
+
+                // Set the inner HTML contents of the #game div to our html string
+                document.getElementById("game").innerHTML = html;
+            }
+        };
+    </script>
+
+</body>
+
+</html>
