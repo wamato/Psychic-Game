@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Psychic Game</title>
+    <link rel="stylesheet" type="text/css" href="assests/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assests/css/reset.css">
+     
 </head>
 
 <body>
@@ -29,6 +32,7 @@
             var userGuess = event.key;
 
             var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            console.log(computerGuess);
 
 
             if ((userGuess === "a") || (userGuess === "b") || (userGuess === "c") || (userGuess === "d") || (
@@ -39,35 +43,32 @@
                     userGuess === "r") || (userGuess === "s") || (userGuess === "t") ||
                 (userGuess === "u") || (userGuess === "v") || (userGuess === "w") || (userGuess === "x") || (
                     userGuess === "y") || (userGuess === "z")) {
+                guessesUsed.push(userGuess);
+                console.log(guessesUsed);
 
                 if (userGuess === computerGuess) {
                     wins++;
+                    guessesLeft =15;
+                    guessesUsed=[];
+                    console.log(guessesLeft);
                 } else if (userGuess !== computerGuess) {
                     guessesLeft = guessesLeft - 1;
 
                 }
                 if (guessesLeft === 0) {
                     losses++;
-                }
-                if ((guessesLeft === 0) && (losses = losses++)) {
-                    guessesLeft = 15;
-                } else if (((guessesLeft === 0) || (guessesLeft === 1) || (guessesLeft === 2) || (guessesLeft ===
-                            3) || (guessesLeft === 4) || (guessesLeft === 5) ||
-                        (guessesLeft === 6) || (guessesLeft === 7) || (guessesLeft === 8) || (guessesLeft === 9) ||
-                        (guessesLeft === 10) ||
-                        (guessesLeft === 11) || (guessesLeft === 12) || (guessesLeft === 13) || (guessesLeft === 14) ||
-                        (guessesLeft === 15)) && (wins = wins++)) {
-                    guessesLeft = 15;
+                    guessesLeft=15;
+                    guessesUsed=[];
                 }
 
-
+                var tempValue =guessesUsed.join(",");
+                console.log(tempValue);
                 var html =
-                    "<p>You chose: " + userGuess + "</p>" +
+                    "<p>You chose: " + tempValue + "</p>" +
                     "<p>The computer chose: " + computerGuess + "</p>" +
                     "<p>wins: " + wins + "</p>" +
                     "<p>losses: " + losses + "</p>" +
                     "<p>guesses left: " + guessesLeft + "</p>";
-                "<p>Guesses used: " + guessesUsed + "</p>";
 
                 // Set the inner HTML contents of the #game div to our html string
                 document.getElementById("game").innerHTML = html;
